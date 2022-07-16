@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso de Vue 3</title>
+
+    <link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body>
+    <div id="app">
+        <div :style="styles">
+            <label for="themeBlack">
+                <input type="checkbox" name="themeBlack" id="themeBlack" :checked="themeBlack" @click="toogleTheme">Tema Escuro
+            </label>
+            <h1>{{ title }}</h1>
+            <p> {{ fullName }}</p>
+            <hr>
+
+            <h3>Carrinho ({{ cart.length }})</h3>
+            <!--      
+                <img v-bind:src="product.image" v-bind:alt="product.title" style="max-width: 100px;">
+                <strong v-if="product.stars > 0">{{ product.stars }}</strong>
+            -->
+
+            <!-- Pode ser usado de forma mais simples (abreviação) tirando o v-bind e deixando somente o ":" -->
+            <!-- 
+                <img :src="product2.image" :alt="product2.title" style="max-width: 100px;"> 
+                <strong v-show="product2.stars > 0">{{ product2.stars }}</strong> 
+            -->
+            
+            <ul>
+                <li v-for="(product, index) in products" :key="index">
+                    <product-detail 
+                        :product="product"
+                        :product-in-cart="inCart(product)"
+                        @add-prod-cart="addCart">
+                    </product-detail>                
+                    <!-- 
+                        <a 
+                        href="#" 
+                        @click.prevent="removeCart(product)"
+                        v-if="inCart(product)">
+                        REMOVE Cart
+                    </a>
+                    -->
+                </li>
+            </ul>
+            <hr>
+            <example-form></example-form>
+        </div>
+    </div><!--App-->
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="./app.js"></script>
+    <script src="./components/ProductDetail.js"></script>
+    <script src="./components/ExampleForms.js"></script>
+    <script>
+        app.mount('#app')
+    </script>
+</body>
+</html>
+
